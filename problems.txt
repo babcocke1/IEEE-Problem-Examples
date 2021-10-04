@@ -1,0 +1,92 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Python
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+# Question 1:
+# FizzBuzz
+# https://leetcode.com/problems/fizz-buzz/
+# O(N)
+class Solution:
+    def fizzBuzz(self, n: int) -> List[str]:
+        output = []
+        for i in range(1, n + 1):
+            if i % 3 == 0 and i % 5 != 0:
+                output.append("Fizz")
+            elif i % 3 != 0 and i % 5 == 0:
+                output.append("Buzz")
+            elif i % 5 == 0 and i % 3 == 0:
+                output.append("FizzBuzz")
+            else:
+                output.append(str(i))
+        return output
+      
+# Question 2
+# Two Sum
+# Return indices of two numbers adding to target, 
+# guaranteed there is only one solution.
+
+# O(N^2)
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                if nums[i] + nums[j] == target:
+                    return [i,j]
+# O(N)
+# Use a dictionary to hash previous results
+# A dictionary is basically a hash 
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        d = {}
+        for i in range(len(nums)):
+            remaining = target - nums[i]
+            if remaining in d:
+                return(d[remaining], i)
+            else:
+                d[nums[i]] = i
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+C++
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// Q3: Fibonacci
+// https://leetcode.com/problems/fibonacci-number/
+// Let F(0) = 0, F(1) = F(2) = 1, F(n) = F(n-1) + F(n-2) for n > 2
+// lets do c++ just for fun
+
+// solution 1, recurion
+// O(1.6180^n)
+// This is actually the golden ratio
+// Kind of cool, not practical for large n
+class Solution {
+public:
+    int fib(int n) {
+        if (n < 2) return n;
+        else return fib(n-1) + fib(n-2);
+    }
+};
+
+// solution 2
+// O(n)
+// This can be considered dynamic programming
+// Dynamic programming is solve a smaller version of the problem and store it in memory
+// then use the stored solutions of subproblems to solve the large problems
+// Whenever a recursive function makes multiple calls with the same input, 
+// Consider dynamic programming.
+// Practical for large N
+class Solution {
+public:
+    int fib(int n) {
+        if (n < 2) return n;
+        int temp1, temp2;
+        temp1 = 0;
+        temp2 = 1;
+        int f; // result
+        for (int i = 0; i < n; i++) {
+            f = temp1 + temp2;
+            if (i % 2) temp1 = f;
+            else temp2 = f;
+        }
+        return f;
+    }
+};
